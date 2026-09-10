@@ -4,18 +4,11 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  ArrowRight,
-  Send,
-  Sparkles 
+  ArrowRight
 } from 'lucide-react';
 import './Footer.css';
 
 const Footer = () => {
-  const handleNewsletterSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for subscribing to PEP Software newsletter!');
-  };
-
   return (
     <footer className="footer-section">
       <div className="footer-glow-top"></div>
@@ -99,7 +92,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* Column 4: Contact & Newsletter */}
+          {/* Column 4: Contact */}
           <div className="footer-col contact-col">
             <h4 className="footer-heading">
               Connect With Us
@@ -118,23 +111,6 @@ const Footer = () => {
                 <Phone size={18} className="contact-icon" />
                 <a href="tel:+18005557377">+1 (800) 555-PEP1</a>
               </div>
-            </div>
-
-            <div className="newsletter-box">
-              <span className="newsletter-title">
-                <Sparkles size={14} className="gold-icon" /> Subscribe to Updates
-              </span>
-              <form onSubmit={handleNewsletterSubmit} className="newsletter-form">
-                <input 
-                  type="email" 
-                  placeholder="Enter your email address" 
-                  required 
-                  className="newsletter-input"
-                />
-                <button type="submit" className="newsletter-btn" aria-label="Subscribe">
-                  <Send size={16} />
-                </button>
-              </form>
             </div>
           </div>
         </div>

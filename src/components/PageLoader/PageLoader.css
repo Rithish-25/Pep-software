@@ -1,0 +1,162 @@
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background: radial-gradient(circle at center, #2D1152 0%, #18082D 70%, #110424 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, visibility;
+}
+
+.page-loader.loader-exit {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Ambient Background Radial Glow */
+.loader-ambient-glow {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 183, 3, 0.22) 0%, rgba(109, 40, 217, 0.15) 55%, rgba(0, 0, 0, 0) 75%);
+  animation: ambientPulse 1.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+/* Center Content Holder */
+.loader-center-content {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Elegant Rotating Light Ring */
+.loader-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--gold-primary);
+  border-right-color: rgba(255, 183, 3, 0.3);
+  border-bottom-color: var(--purple-accent);
+  border-left-color: rgba(109, 40, 217, 0.2);
+  animation: ringRotate 2.5s linear infinite;
+  box-shadow: 0 0 20px rgba(255, 183, 3, 0.25);
+}
+
+/* Orbiting Spark Particles */
+.loader-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: particleRotate 3s linear infinite;
+}
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold-primary);
+  box-shadow: 0 0 10px var(--gold-primary), 0 0 15px #FFF;
+}
+
+.particle-1 { top: -2.5px; left: 50%; transform: translateX(-50%); }
+.particle-2 { bottom: -2.5px; left: 50%; transform: translateX(-50%); }
+.particle-3 { left: -2.5px; top: 50%; transform: translateY(-50%); }
+.particle-4 { right: -2.5px; top: 50%; transform: translateY(-50%); }
+
+/* Unchanged Logo Symbol Container & Pulse */
+.loader-logo-wrapper {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: logoPulse 1.8s ease-in-out infinite;
+}
+
+.loader-logo-img {
+  width: 82px;
+  height: 82px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 16px rgba(255, 183, 3, 0.45));
+}
+
+/* Animation Keyframes */
+@keyframes logoPulse {
+  0%, 100% {
+    transform: scale(0.96);
+    filter: drop-shadow(0 0 12px rgba(255, 183, 3, 0.35));
+  }
+  50% {
+    transform: scale(1.06);
+    filter: drop-shadow(0 0 24px rgba(255, 183, 3, 0.65)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.5));
+  }
+}
+
+@keyframes ringRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes particleRotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes ambientPulse {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .loader-center-content {
+    width: 135px;
+    height: 135px;
+  }
+
+  .loader-logo-wrapper {
+    width: 76px;
+    height: 76px;
+  }
+
+  .loader-logo-img {
+    width: 68px;
+    height: 68px;
+  }
+
+  .loader-ambient-glow {
+    width: 270px;
+    height: 270px;
+  }
+}

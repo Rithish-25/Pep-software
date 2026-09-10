@@ -7,8 +7,7 @@ import {
   ArrowRight, 
   Sparkles, 
   CheckCircle, 
-  ShieldCheck,
-  Award
+  ShieldCheck
 } from 'lucide-react';
 import { servicesData, portfolioProjects, whyChooseUs, companyStats } from '../../data/mockData';
 import './Home.css';
@@ -89,16 +88,6 @@ const Home = () => {
                     <span className="token-purple">await</span> software.<span className="token-gold">deploy</span>();
                   </code>
                 </pre>
-              </div>
-
-              <div className="floating-stat-widget">
-                <div className="stat-widget-icon">
-                  <Award size={20} />
-                </div>
-                <div>
-                  <div className="stat-widget-value">150+</div>
-                  <div className="stat-widget-label">Global Deliveries</div>
-                </div>
               </div>
             </div>
           </div>

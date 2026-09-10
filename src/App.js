@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import ScrollToTop from './components/ScrollToTop/ScrollToTop';
+import PageLoader from './components/PageLoader/PageLoader';
 
 import Home from './pages/Home/Home';
 import ServicesPage from './pages/Services/ServicesPage';
@@ -15,6 +16,7 @@ import './App.css';
 function App() {
   return (
     <Router>
+      <PageLoader />
       <ScrollToTop />
       <div className="app-container">
         <Navbar />
