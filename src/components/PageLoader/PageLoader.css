@@ -22,6 +22,14 @@
   pointer-events: none;
 }
 
+/* Make scrollbar completely transparent ONLY while loader screen is active */
+body.loader-active::-webkit-scrollbar,
+body.loader-active::-webkit-scrollbar-track,
+body.loader-active::-webkit-scrollbar-thumb {
+  background: transparent !important;
+  border: none !important;
+}
+
 /* Ambient Background Radial Glow */
 .loader-ambient-glow {
   position: absolute;

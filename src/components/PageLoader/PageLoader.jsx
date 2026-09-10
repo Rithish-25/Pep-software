@@ -6,17 +6,26 @@ const PageLoader = () => {
   const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    // 1.8s initial page load display time before smooth exit
+    // Lock body scroll & hide scrollbar ONLY while loader is active
+    document.body.classList.add('loader-active');
+    document.body.style.overflow = 'hidden';
+
     const timer = setTimeout(() => {
       setExiting(true);
       const removeTimer = setTimeout(() => {
         setLoading(false);
-      }, 500); // matches CSS fade-out transition duration
+        document.body.classList.remove('loader-active');
+        document.body.style.overflow = 'unset';
+      }, 500);
 
       return () => clearTimeout(removeTimer);
     }, 1800);
 
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      document.body.classList.remove('loader-active');
+      document.body.style.overflow = 'unset';
+    };
   }, []);
 
   if (!loading) return null;
