@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* Brand Color Palette */
+  --purple-primary: #3B1566;
+  --purple-dark: #1E0836;
+  --purple-light: #521E8C;
+  --purple-accent: #6D28D9;
+  --purple-glow: rgba(109, 40, 217, 0.35);
+
+  --gold-primary: #FFB703;
+  --gold-bright: #FFC107;
+  --gold-dark: #D97706;
+  --gold-light: #FFE082;
+  --gold-glow: rgba(255, 183, 3, 0.4);
+
+  --white: #FFFFFF;
+  --off-white: #F9FAFB;
+  --light-bg: #F4F0FA;
+  
+  --text-dark: #1E1828;
+  --text-muted: #6B7280;
+  --text-light: #E5E7EB;
+
+  --border-light: rgba(59, 21, 102, 0.1);
+  --border-glass: rgba(255, 255, 255, 0.18);
+
+  --shadow-sm: 0 4px 6px -1px rgba(30, 8, 54, 0.05);
+  --shadow-md: 0 10px 15px -3px rgba(30, 8, 54, 0.1);
+  --shadow-lg: 0 20px 25px -5px rgba(30, 8, 54, 0.15);
+  --shadow-gold: 0 8px 25px rgba(255, 183, 3, 0.3);
+  --shadow-purple: 0 10px 30px rgba(59, 21, 102, 0.25);
+
+  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--white);
+  color: var(--text-dark);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #150628;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--purple-light);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-primary);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-dark);
+  font-weight: 700;
+  line-height: 1.25;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: manual;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
