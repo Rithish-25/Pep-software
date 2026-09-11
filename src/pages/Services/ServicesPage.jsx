@@ -9,7 +9,7 @@ import {
   Layers,
   ArrowUpRight 
 } from 'lucide-react';
-import { servicesData } from '../../data/pepData';
+import { servicesData } from '../../data/mockData';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './SubServicePage.css';
 

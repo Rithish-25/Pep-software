@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
-import { siteConfig, servicesData } from '../../data/pepData';
+import { siteConfig, servicesData } from '../../data/mockData';
 import './Navbar.css';
 
 const Navbar = () => {

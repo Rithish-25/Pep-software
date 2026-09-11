@@ -1,5 +1,5 @@
 import React from 'react';
-import { clientLogos } from '../../data/pepData';
+import { clientLogos } from '../../data/mockData';
 import './ClientMarquee.css';
 
 const ClientMarquee = () => {

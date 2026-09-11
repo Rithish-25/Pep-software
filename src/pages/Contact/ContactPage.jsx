@@ -5,7 +5,7 @@ import {
   PhoneCall,
   CheckCircle2
 } from 'lucide-react';
-import { siteConfig } from '../../data/pepData';
+import { siteConfig } from '../../data/mockData';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './ContactPage.css';
 

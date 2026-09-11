@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { portfolioProjects } from '../../data/pepData';
+import { portfolioProjects } from '../../data/mockData';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './PortfolioPage.css';
 

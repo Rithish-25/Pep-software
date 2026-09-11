@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { siteConfig } from '../../data/pepData';
+import { siteConfig } from '../../data/mockData';
 import './Footer.css';
 
 const Footer = () => {

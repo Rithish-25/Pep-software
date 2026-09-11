@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronLeft, ChevronRight, Quote, Star } from 'lucide-react';
-import { testimonials } from '../../data/pepData';
+import { testimonials } from '../../data/mockData';
 import ScrollReveal from '../ScrollReveal/ScrollReveal';
 import './TestimonialSlider.css';
 

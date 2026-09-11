@@ -5,7 +5,7 @@ import {
   Eye, 
   ArrowRight
 } from 'lucide-react';
-import { companyStats, siteConfig } from '../../data/pepData';
+import { companyStats, siteConfig } from '../../data/mockData';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
 import './AboutPage.css';

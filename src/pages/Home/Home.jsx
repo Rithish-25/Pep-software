@@ -18,7 +18,7 @@ import {
   servicesData, 
   whyChooseUs, 
   workflowSteps 
-} from '../../data/pepData';
+} from '../../data/mockData';
 import ClientMarquee from '../../components/ClientMarquee/ClientMarquee';
 import TestimonialSlider from '../../components/TestimonialSlider/TestimonialSlider';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';

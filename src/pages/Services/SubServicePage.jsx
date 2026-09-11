@@ -10,7 +10,7 @@ import {
   Check,
   FileText
 } from 'lucide-react';
-import { servicesData, siteConfig } from '../../data/pepData';
+import { servicesData, siteConfig } from '../../data/mockData';
 import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './SubServicePage.css';
 

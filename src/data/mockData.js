@@ -1,180 +1,407 @@
+// Local Asset Imports - Structured Folders
+import logo from '../assets/images/logos/logo.png';
+import footerLogo from '../assets/images/logos/footerLogo.png';
+import favicon from '../assets/images/logos/favicon.png';
+
+import heroGraphic from '../assets/images/graphics/heroGraphic.png';
+import whoWeAreGraphic from '../assets/images/graphics/whoWeAreGraphic.png';
+import servicesSphere from '../assets/images/graphics/servicesSphere.png';
+import whyChooseUsGraphic from '../assets/images/graphics/whyChooseUsGraphic.png';
+import howWeWorkGraphic from '../assets/images/graphics/howWeWorkGraphic.png';
+
+import client_sda from '../assets/images/clients/client_sda.png';
+import client_kyro from '../assets/images/clients/client_kyro.png';
+import client_navis from '../assets/images/clients/client_navis.png';
+import client_ssp from '../assets/images/clients/client_ssp.png';
+import client_pravin from '../assets/images/clients/client_pravin.png';
+import client_rvr from '../assets/images/clients/client_rvr.png';
+import client_lenient from '../assets/images/clients/client_lenient.png';
+import client_aanddal from '../assets/images/clients/client_aanddal.png';
+import client_europrogetti from '../assets/images/clients/client_europrogetti.png';
+import client_texcher from '../assets/images/clients/client_texcher.png';
+import client_mochooo from '../assets/images/clients/client_mochooo.png';
+import client_frame2 from '../assets/images/clients/client_frame2.png';
+import client_frame3 from '../assets/images/clients/client_frame3.png';
+
+import avatar_lenin from '../assets/images/avatars/avatar_lenin.png';
+import avatar_praveen from '../assets/images/avatars/avatar_praveen.jpg';
+import avatar_prakash from '../assets/images/avatars/avatar_prakash.png';
+import avatar_thangavelu from '../assets/images/avatars/avatar_thangavelu.png';
+
+// Pep Software Authentic Dataset
+export const siteConfig = {
+  name: "Pep Software",
+  legalName: "Pep Softwares",
+  tagline: "Digital Excellence Starts Here",
+  slogan: "Seize the digital spotlight and boost your business with Pep Software.",
+  logo: logo,
+  footerLogo: footerLogo,
+  favicon: favicon,
+  heroGraphic: heroGraphic,
+  whoWeAreGraphic: whoWeAreGraphic,
+  servicesFloatingSphere: servicesSphere,
+  whyChooseUsGraphic: whyChooseUsGraphic,
+  howWeWorkGraphic: howWeWorkGraphic,
+  contact: {
+    email: "contact@pepsoftwares.com",
+    phone: "+91 94895 24424",
+    address: "Erode, Tamil Nadu, India",
+    workingHours: "Mon - Sat: 9:00 AM - 7:00 PM IST"
+  },
+  socials: {
+    linkedin: "https://linkedin.com/company/pep-software",
+    instagram: "https://instagram.com/pepsoftware",
+    facebook: "https://facebook.com/pepsoftware",
+    twitter: "https://twitter.com/pepsoftware",
+    whatsapp: "https://wa.me/919489524424"
+  }
+};
+
+export const clientLogos = [
+  { name: "SDA Clothing", url: client_sda },
+  { name: "Kyro Steels", url: client_kyro },
+  { name: "Navis Studio", url: client_navis },
+  { name: "SSP Infra Projects", url: client_ssp },
+  { name: "Pravin Bottelings", url: client_pravin },
+  { name: "RVR Bags", url: client_rvr },
+  { name: "Lenient Technologies", url: client_lenient },
+  { name: "Aanddal Constructions", url: client_aanddal },
+  { name: "Europrogetti", url: client_europrogetti },
+  { name: "Texcher Impex", url: client_texcher },
+  { name: "Mochooo TV", url: client_mochooo },
+  { name: "Frame 2", url: client_frame2 },
+  { name: "Frame 3", url: client_frame3 }
+];
+
+export const companyStats = [
+  { value: "5", label: "Years Experience", desc: "Crafting digital enterprise solutions" },
+  { value: "25+", label: "Website Projects", desc: "Delivered for global clients" },
+  { value: "10+", label: "Mobile App Projects", desc: "Built for iOS & Android" },
+  { value: "4.7", label: "Review Clients", desc: "Average client rating rating score" }
+];
+
 export const servicesData = [
   {
-    id: "website-development",
+    id: "ui-ux-design-services",
+    slug: "ui-ux-design-services",
+    title: "UI/UX Design",
+    iconName: "Palette",
+    shortDesc: "We design beautiful, user-friendly interfaces that improve engagement and deliver exceptional user experiences across web and mobile platforms.",
+    fullDesc: "At Pep Software, our UI/UX design process centers on deep user research, strategic wireframing, interactive prototyping, and modern aesthetic design. We turn complex visual concepts into seamless, intuitive user experiences that convert visitors into loyal customers.",
+    badge: "Design & Research",
+    features: [
+      "User Research & Wireframing",
+      "Interactive High-Fidelity Prototypes",
+      "Design Systems & Component Libraries",
+      "Mobile & Web UI Design",
+      "Usability Testing & Design Audit"
+    ],
+    deliverables: [
+      "Pixel-perfect Figma Design Files",
+      "Complete Typography & Color Guidelines",
+      "Clickable Interactive Prototypes",
+      "Responsive Layout Grid Specifications"
+    ]
+  },
+  {
+    id: "web-design-and-development-services",
+    slug: "web-design-and-development-services",
     title: "Website Development",
-    shortDesc: "Modern, responsive and high-performance websites built with cutting-edge technology.",
-    fullDesc: "We craft visually stunning, SEO-optimized, and lightning-fast web applications tailored to elevate your brand presence and convert visitors into loyal customers.",
     iconName: "Globe",
-    badge: "Web Solutions",
+    shortDesc: "From sleek business websites to advanced web applications, we build SEO-optimized, responsive, and high-performing digital platforms that grow your brand.",
+    fullDesc: "From custom React/Next.js web applications to responsive e-commerce stores and enterprise web portals, Pep Software delivers scalable, ultra-fast web solutions tailored to your unique business goals.",
+    badge: "Web Engineering",
     features: [
-      "Custom Frontend & Backend Architecture",
-      "Progressive Web Apps (PWA) & Next.js",
-      "E-Commerce & Payment Gateways",
-      "SEO Optimization & Core Web Vitals Optimization",
-      "Responsive & Mobile-First Design"
+      "Custom React & Next.js Web Development",
+      "Responsive & Mobile-Optimized Layouts",
+      "E-Commerce & Payment Gateway Integration",
+      "Headless CMS & Custom WordPress",
+      "SEO Optimization & Lightning Fast Speed"
+    ],
+    deliverables: [
+      "Production-ready Clean Codebase",
+      "Fully Responsive Across All Screens",
+      "SSL, Security & Speed Optimization",
+      "Admin Panel & Content Management Setup"
     ]
   },
   {
-    id: "mobile-app-development",
+    id: "mobile-app-development-services",
+    slug: "mobile-app-development-services",
     title: "Mobile App Development",
-    shortDesc: "Beautiful, intuitive and scalable mobile applications for iOS and Android.",
-    fullDesc: "From conceptualization to App Store release, we build native and cross-platform mobile apps that offer native performance, sleek UI/UX, and robust offline capabilities.",
     iconName: "Smartphone",
-    badge: "Mobile Solutions",
+    shortDesc: "We build fast, intuitive mobile apps tailored to your business goals. From concept to launch, we ensure a smooth, user-focused experience across devices.",
+    fullDesc: "We build powerful iOS and Android mobile applications using Flutter and React Native. Whether you need a customer-facing app, an e-commerce mobile store, or an enterprise mobile tool, we ensure top-tier performance.",
+    badge: "Mobile Apps",
     features: [
-      "iOS & Android App Development",
-      "React Native & Flutter Cross-Platform Apps",
-      "Intuitive UI/UX Mobile Interface Design",
-      "App Store & Google Play Publishing",
-      "Push Notifications & Cloud Synchronization"
+      "iOS & Android Mobile App Development",
+      "Cross-Platform Flutter & React Native",
+      "Real-time Push Notifications & APIs",
+      "Secure In-App Payments & Auth",
+      "App Store & Google Play Publishing"
+    ],
+    deliverables: [
+      "Native iOS (.ipa) & Android (.apk/.aab) Builds",
+      "App Store Deployment Assistance",
+      "RESTful API & Cloud Backend Integration",
+      "6 Months Post-Launch Support"
     ]
   },
   {
-    id: "customized-software",
-    title: "Customized Software",
-    shortDesc: "Tailored software solutions built for specific enterprise and business needs.",
-    fullDesc: "Empower your business workflows with bespoke enterprise software, SaaS platforms, custom CRM systems, and cloud infrastructure tailored to your exact operational requirements.",
-    iconName: "Cpu",
-    badge: "Enterprise SaaS",
+    id: "ar-vr-design-and-development",
+    slug: "ar-vr-design-and-development",
+    title: "AR/VR Design",
+    iconName: "Layers",
+    shortDesc: "Create immersive AR/VR experiences that engage and inspire. We design interactive 3D content for web, mobile, and VR platforms.",
+    fullDesc: "Unlock the future of digital interaction with Pep Software's AR/VR development. We build interactive 3D product visualizations, virtual showrooms, and WebAR applications that create unforgettable brand experiences.",
+    badge: "Next-Gen Tech",
     features: [
-      "Custom Enterprise ERP & CRM Platforms",
-      "Cloud Architecture & Microservices",
-      "API Integrations & Third-Party Connectors",
-      "Database Optimization & High Security",
-      "Automated Testing & Maintenance Support"
+      "Interactive 3D Product Visualization",
+      "WebAR (Browser-Based Augmented Reality)",
+      "Virtual Showrooms & Real Estate Walkthroughs",
+      "3D Model Optimization & Rendering",
+      "Cross-Device AR Integration"
+    ],
+    deliverables: [
+      "Web-ready 3D/AR Web Components",
+      "Interactive Virtual Tour Systems",
+      "Optimized 3D Asset Files (.glb, .usdz)",
+      "User Analytics & Engagement Tracking"
     ]
   }
 ];
 
 export const portfolioProjects = [
+  // WEBSITES
   {
-    id: 1,
-    title: "FinPulse Banking Portal",
-    category: "Website Development",
-    categoryId: "website-development",
-    description: "Next-gen web portal for a digital banking platform featuring real-time transaction analytics.",
-    image: "/images/project_banking.jpg",
-    techStack: ["React", "Node.js", "Tailwind", "Chart.js"],
-    client: "FinPulse Global",
-    year: "2025"
+    id: "twilight-engineering",
+    title: "Twilight Engineering Solutions Ltd",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_rvr,
+    bgAccent: "linear-gradient(135deg, #1E40AF 0%, #3B82F6 100%)",
+    type: "website"
   },
   {
-    id: 2,
-    title: "HealthConnect Mobile App",
-    category: "Mobile App Development",
-    categoryId: "mobile-app-development",
-    description: "Telemedicine app allowing patients to consult with top doctors and track vitals seamlessly.",
-    image: "/images/project_health.jpg",
-    techStack: ["React Native", "Firebase", "WebRTC", "Redux"],
-    client: "HealthConnect Inc",
-    year: "2025"
+    id: "italian-water-consultancy",
+    title: "Italian Water Consultancy (IWS)",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_navis,
+    bgAccent: "linear-gradient(135deg, #059669 0%, #10B981 100%)",
+    type: "website"
   },
   {
-    id: 3,
-    title: "OmniStore ERP Suite",
-    category: "Customized Software",
-    categoryId: "customized-software",
-    description: "End-to-end inventory management and supply chain enterprise software for multi-location retail.",
-    image: "/images/project_erp.jpg",
-    techStack: ["React", "Python", "PostgreSQL", "Docker"],
-    client: "OmniStore Retail",
-    year: "2024"
+    id: "erodu-eye-bank",
+    title: "Erodu Eye Bank",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_kyro,
+    bgAccent: "linear-gradient(135deg, #DC2626 0%, #EF4444 100%)",
+    type: "website"
   },
   {
-    id: 4,
-    title: "Aether AI Content Platform",
-    category: "Website Development",
-    categoryId: "website-development",
-    description: "SaaS web application providing AI-driven content creation and workflow management tools.",
-    image: "/images/project_ai.jpg",
-    techStack: ["React", "TypeScript", "OpenAI API", "AWS"],
-    client: "Aether Labs",
-    year: "2025"
+    id: "shine-jewellery",
+    title: "Shine Jewellery E-Commerce",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_sda,
+    bgAccent: "linear-gradient(135deg, #047857 0%, #34D399 100%)",
+    type: "website"
   },
   {
-    id: 5,
-    title: "FitLife Tracker App",
-    category: "Mobile App Development",
-    categoryId: "mobile-app-development",
-    description: "Cross-platform fitness app with customized workout plans, GPS tracking, and community challenges.",
-    image: "/images/project_fitness.jpg",
-    techStack: ["Flutter", "GraphQL", "Node.js", "MongoDB"],
-    client: "FitLife Global",
-    year: "2024"
+    id: "grand-launch-discounts",
+    title: "Baking & Cake Supplies Store",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_ssp,
+    bgAccent: "linear-gradient(135deg, #B91C1C 0%, #F87171 100%)",
+    type: "website"
   },
   {
-    id: 6,
-    title: "LogiSmart Logistics Hub",
-    category: "Customized Software",
-    categoryId: "customized-software",
-    description: "Real-time fleet tracking and automated dispatch management software system for global logistics.",
-    image: "/images/project_logistics.jpg",
-    techStack: ["React", "Go", "Kubernetes", "Google Maps API"],
-    client: "LogiSmart Cargo",
-    year: "2025"
-  }
-];
+    id: "metal-supplier",
+    title: "Metal & Raw Material Supplier",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_pravin,
+    bgAccent: "linear-gradient(135deg, #D97706 0%, #FBBF24 100%)",
+    type: "website"
+  },
+  {
+    id: "allen-residency",
+    title: "Allen Residency",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_lenient,
+    bgAccent: "linear-gradient(135deg, #4C1D95 0%, #8B5CF6 100%)",
+    type: "website"
+  },
+  {
+    id: "pravin-bottelings-web",
+    title: "Pravin Bottelings",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_aanddal,
+    bgAccent: "linear-gradient(135deg, #0D9488 0%, #2DD4BF 100%)",
+    type: "website"
+  },
+  {
+    id: "hakir-pharma",
+    title: "Hakir Pharmaceuticals",
+    category: "WEBSITES",
+    categoryKey: "web",
+    image: client_europrogetti,
+    bgAccent: "linear-gradient(135deg, #0284C7 0%, #38BDF8 100%)",
+    type: "website"
+  },
 
-export const companyStats = [
-  { value: "150+", label: "Projects Delivered", icon: "CheckCircle" },
-  { value: "99%", label: "Client Satisfaction", icon: "Smile" },
-  { value: "10+", label: "Years Experience", icon: "Award" },
-  { value: "24/7", label: "Dedicated Support", icon: "Clock" }
+  // MOBILE APPS
+  {
+    id: "esuba-app",
+    title: "ESUBA – Android App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "ESUBA",
+    screenBg: "#EAB308",
+    bgAccent: "#FEF08A",
+    type: "mobile"
+  },
+  {
+    id: "lenient-tech-app",
+    title: "Lenient Technologies – Android App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "Lenient",
+    logoSub: "Technologies",
+    screenBg: "#FFFFFF",
+    bgAccent: "#4ADE80",
+    type: "mobile"
+  },
+  {
+    id: "g-elite-app",
+    title: "G-Elite – Android, iOS App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "G-ELITE",
+    screenBg: "#16A34A",
+    bgAccent: "#FACC15",
+    type: "mobile"
+  },
+  {
+    id: "feedit-app",
+    title: "FeedIt – Android App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "FeedIt",
+    screenBg: "#065F46",
+    bgAccent: "#D1FAE5",
+    type: "mobile"
+  },
+  {
+    id: "rotary-app",
+    title: "Rotary Means Business – Android App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "ROTARY",
+    logoSub: "Means Business",
+    screenBg: "#1E3A8A",
+    bgAccent: "#3B82F6",
+    type: "mobile"
+  },
+  {
+    id: "rainbow-tv-app",
+    title: "Rainbow TV – Mobile App",
+    category: "MOBILE APPS",
+    categoryKey: "mobile",
+    logoText: "Rainbow TV",
+    screenBg: "linear-gradient(180deg, #38BDF8 0%, #1E3A8A 100%)",
+    bgAccent: "#C084FC",
+    type: "mobile"
+  },
+
+  // AR / VR
+  {
+    id: "ar-showroom-3d",
+    title: "3D Virtual Product Showroom",
+    category: "AR/VR",
+    categoryKey: "ar-vr",
+    image: "https://images.unsplash.com/photo-1617806118233-18e1de247200?w=600&auto=format&fit=crop&q=80",
+    bgAccent: "linear-gradient(135deg, #7C3AED 0%, #C084FC 100%)",
+    type: "website"
+  },
+  {
+    id: "vr-training-sim",
+    title: "VR Industrial Training Simulator",
+    category: "AR/VR",
+    categoryKey: "ar-vr",
+    image: "https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=600&auto=format&fit=crop&q=80",
+    bgAccent: "linear-gradient(135deg, #059669 0%, #34D399 100%)",
+    type: "website"
+  },
+  {
+    id: "ar-architectural-model",
+    title: "WebAR Architectural 3D Model",
+    category: "AR/VR",
+    categoryKey: "ar-vr",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&auto=format&fit=crop&q=80",
+    bgAccent: "linear-gradient(135deg, #EA580C 0%, #FDBA74 100%)",
+    type: "website"
+  }
 ];
 
 export const whyChooseUs = [
   {
-    title: "Tailored Engineering",
-    description: "We don't do cookie-cutter code. Every solution is custom engineered to solve your exact business challenges.",
-    icon: "Code"
+    title: "Expertise in Digital Innovation",
+    description: "We blend design thinking with emerging tech to create modern, user-focused solutions."
   },
   {
-    title: "Scalable Architecture",
-    description: "Built for growth from day one using modern cloud microservices and high-concurrency database designs.",
-    icon: "Layers"
+    title: "Proven Track Record of Success",
+    description: "From startups to established brands, our projects drive measurable impact.",
+    highlight: true
   },
   {
-    title: "Visually Impressive UI",
-    description: "We craft captivating user interfaces that engage users and project a world-class brand impression.",
-    icon: "Sparkles"
+    title: "Dedicated and Experienced Team",
+    description: "Our skilled team brings creativity, strategy, and execution to every project."
+  }
+];
+
+export const workflowSteps = [
+  {
+    step: "1",
+    title: "Free Consultation",
+    description: "We understand your needs, goals, and vision through a friendly, no-pressure call."
   },
   {
-    title: "On-Time Delivery",
-    description: "Agile development sprints with clear milestones ensure your project launches on schedule every time.",
-    icon: "Zap"
+    step: "2",
+    title: "Share Your Business Process",
+    description: "Tell us how your business works — we'll align our solution with your real-world flow."
+  },
+  {
+    step: "3",
+    title: "Launch Your End Product",
+    description: "After design and development, we deliver a ready-to-use digital solution — tested and deployed."
   }
 ];
 
 export const testimonials = [
   {
-    quote: "PEP Software transformed our digital infrastructure with an intuitive web platform and mobile app. Their purple & gold branded solutions exceeded all our expectations!",
-    author: "Sarah Jenkins",
-    role: "CTO, FinPulse Global",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
+    text: "We are Lenient Technologies, dealing with computer hardware sales and service in Erode. We needed a custom mobile app for our internal use to manage service calls and stock easily. The team clearly understood our requirements and delivered a user-friendly app, just the way we wanted. Very professional and supportive throughout the project. Thank you for your great work!",
+    name: "Lenin",
+    avatar: avatar_lenin
   },
   {
-    quote: "The customized ERP software they created streamlined our supply chain management and boosted our operational efficiency by 45% in just 3 months.",
-    author: "David Miller",
-    role: "Operations Director, OmniStore Retail",
-    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop"
-  }
-];
-
-export const faqs = [
-  {
-    question: "What technology stack does PEP Software use?",
-    answer: "We specialize in modern JavaScript frameworks including React.js, Next.js, React Native, Node.js, Python, PostgreSQL, AWS, and Docker to ensure maximum performance and security."
+    text: "We are running a plastic bottle manufacturing company and wanted to build our website. We reached out to Pep Software, a trusted website design company in Erode. They understood our business clearly and designed a clean and professional site. The team is friendly and gave regular updates. Very happy with their work!",
+    name: "Praveen",
+    avatar: avatar_praveen
   },
   {
-    question: "How long does a typical website or custom software project take?",
-    answer: "Project timelines depend on project scope. Standard websites typically take 2-4 weeks, while complex mobile apps or enterprise software take 6-12 weeks with agile sprint updates."
+    text: "We are in the pharma business and we wanted to take our brand online. We found this website design company in Erode and they built a neat and clean website for us. Very friendly team and easy to work with. They delivered everything on time. Highly recommended for anyone looking for a professional website!",
+    name: "Prakash",
+    avatar: avatar_prakash
   },
   {
-    question: "Do you provide post-launch maintenance and support?",
-    answer: "Yes! We offer 24/7 dedicated post-launch support, server monitoring, security updates, and feature updates under flexible maintenance packages."
-  },
-  {
-    question: "Can PEP Software customize existing software systems?",
-    answer: "Absolutely. We specialize in modernizing legacy applications, API integrations, and building custom modular additions to existing software systems."
+    text: "I recently got a one page website designed by Pep Software for my mutual fund platform, and I’m extremely happy with the result! The site is fast, clean, and looks great on both desktop and mobile. What impressed me the most was their affordable pricing and how quickly they delivered.",
+    name: "Thangavelu B",
+    avatar: avatar_thangavelu
   }
 ];
