@@ -1,147 +1,117 @@
 import React, { useState } from 'react';
-import { portfolioProjects } from '../../data/mockData';
-import { ExternalLink, X, Calendar, User, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
+import { portfolioProjects } from '../../data/pepData';
+import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './PortfolioPage.css';
-
-const categories = [
-  { id: 'all', label: 'All Projects' },
-  { id: 'website-development', label: 'Websites' },
-  { id: 'mobile-app-development', label: 'Mobile Apps' },
-  { id: 'customized-software', label: 'Customized Software' }
-];
 
 const PortfolioPage = () => {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [selectedProject, setSelectedProject] = useState(null);
 
-  const filteredProjects = activeFilter === 'all'
-    ? portfolioProjects
-    : portfolioProjects.filter(p => p.categoryId === activeFilter);
+  const categories = [
+    { key: 'all', label: 'ALL' },
+    { key: 'web', label: 'WEBSITES' },
+    { key: 'mobile', label: 'MOBILE APPS' },
+    { key: 'ar-vr', label: 'AR/VR' }
+  ];
+
+  const filteredProjects = activeFilter === 'all' 
+    ? portfolioProjects 
+    : portfolioProjects.filter(p => p.categoryKey === activeFilter);
 
   return (
     <div className="portfolio-page">
-      {/* PAGE HERO */}
-      <section className="portfolio-hero">
-        <div className="container text-center">
-          <span className="portfolio-badge-gold">Proven Track Record</span>
-          <h1 className="portfolio-hero-title">
-            Our Featured <span className="portfolio-gradient-gold">Portfolio</span>
-          </h1>
-          <p className="portfolio-hero-desc">
-            Discover how PEP Software delivers high-impact web, mobile, and custom enterprise software for industry leaders across the globe.
-          </p>
-        </div>
-      </section>
-
-      {/* PORTFOLIO GRID SECTION */}
-      <section className="portfolio-grid-section">
+      {/* HERO BANNER */}
+      <section className="portfolio-hero-banner">
         <div className="container">
-          {/* Category Filter Bar */}
-          <div className="portfolio-filter-bar">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                className={`filter-tab ${activeFilter === cat.id ? 'active' : ''}`}
-                onClick={() => setActiveFilter(cat.id)}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+          <ScrollReveal animation="fade-up">
+            <span className="badge-tag glass">OUR WORK</span>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={150}>
+            <h1 className="portfolio-hero-title">Delivering Impactful Digital Products</h1>
+          </ScrollReveal>
+          <ScrollReveal animation="fade-up" delay={300}>
+            <p className="portfolio-hero-desc">
+              Browse our showcase of high-performance web platforms, enterprise applications, mobile solutions, and interactive AR/VR experiences.
+            </p>
+          </ScrollReveal>
+        </div>
+      </section>
 
-          {/* Grid Items */}
-          <div className="portfolio-full-grid">
-            {filteredProjects.map((project) => (
-              <div key={project.id} className="portfolio-item-card">
-                <div className="portfolio-item-image">
-                  <img src={project.image} alt={project.title} />
-                  <span className="item-category-tag">{project.category}</span>
-                </div>
-
-                <div className="portfolio-item-content">
-                  <h3 className="item-title">{project.title}</h3>
-                  <p className="item-desc">{project.description}</p>
-                  
-                  <div className="item-tech-stack">
-                    {project.techStack.map((tech, idx) => (
-                      <span key={idx} className="tech-badge">{tech}</span>
-                    ))}
-                  </div>
-
-                  <div className="item-footer-info">
-                    <span className="item-client"><User size={13} /> {project.client}</span>
-                    <span className="item-year"><Calendar size={13} /> {project.year}</span>
-                  </div>
-
-                  <div className="portfolio-card-action">
-                    <button 
-                      className="portfolio-btn-primary sm btn-card-link"
-                      onClick={() => setSelectedProject(project)}
-                    >
-                      View Details <ExternalLink size={14} />
-                    </button>
-                  </div>
-                </div>
+      {/* PORTFOLIO GRID & FILTERS */}
+      <section className="portfolio-content-section">
+        <div className="container">
+          {/* FILTER TABS */}
+          <ScrollReveal animation="fade-up">
+            <div className="portfolio-filters-wrap">
+              <div className="filter-tabs-container">
+                {categories.map((cat) => (
+                  <button
+                    key={cat.key}
+                    className={`filter-tab-btn ${activeFilter === cat.key ? 'active' : ''}`}
+                    onClick={() => setActiveFilter(cat.key)}
+                  >
+                    {cat.label}
+                  </button>
+                ))}
               </div>
+            </div>
+          </ScrollReveal>
+
+          {/* PROJECT GRID */}
+          <div className="portfolio-3col-grid">
+            {filteredProjects.map((project, idx) => (
+              <ScrollReveal key={project.id} animation="fade-up" delay={idx * 80}>
+                <div className="portfolio-card-item">
+                  <div className="card-mockup-stage">
+                    <div className="card-bg-circle" style={{ background: project.bgAccent }}></div>
+                    
+                    {project.type === 'mobile' ? (
+                      <div className="phone-mockup-frame">
+                        <div className="phone-camera-punch"></div>
+                        <div className="phone-screen-area" style={{ background: project.screenBg }}>
+                          <div className="phone-app-badge">
+                            <span className="logo-text-bold">{project.logoText}</span>
+                            {project.logoSub && <span className="logo-sub-desc">{project.logoSub}</span>}
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <div className="website-mockup-frame">
+                        <img src={project.image} alt={project.title} className="website-screen-img" />
+                      </div>
+                    )}
+                  </div>
+
+                  <h3 className="portfolio-card-title">{project.title}</h3>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* PROJECT DETAILS MODAL */}
-      {selectedProject && (
-        <div className="project-modal-backdrop" onClick={() => setSelectedProject(null)}>
-          <div className="project-modal-card" onClick={(e) => e.stopPropagation()}>
-            <button className="modal-close-btn" onClick={() => setSelectedProject(null)}>
-              <X size={24} />
-            </button>
 
-            <div className="modal-header">
-              <span className="portfolio-badge-gold">{selectedProject.category}</span>
-              <h2>{selectedProject.title}</h2>
-            </div>
 
-            <div className="modal-body">
-              <img src={selectedProject.image} alt={selectedProject.title} className="modal-img" />
-              
-              <div className="modal-details">
-                <div className="modal-meta-grid">
-                  <div>
-                    <strong>Client:</strong> {selectedProject.client}
-                  </div>
-                  <div>
-                    <strong>Year:</strong> {selectedProject.year}
-                  </div>
-                  <div>
-                    <strong>Category:</strong> {selectedProject.category}
-                  </div>
-                </div>
-
-                <h3>Project Overview</h3>
-                <p>{selectedProject.description}</p>
-                <p>Engineered by PEP Software using scalable architecture and responsive user experience design standards.</p>
-
-                <h3>Technologies Used</h3>
-                <div className="modal-tech-grid">
-                  {selectedProject.techStack.map((tech, idx) => (
-                    <span key={idx} className="modal-tech-pill">{tech}</span>
-                  ))}
-                </div>
-
-                <div className="modal-cta-row">
-                  <a 
-                    href="/contact" 
-                    className="portfolio-btn-primary"
-                    onClick={() => setSelectedProject(null)}
-                  >
-                    Build Similar Solution <ArrowRight size={16} />
-                  </a>
-                </div>
+      {/* CTA BANNER */}
+      <section className="pep-cta-banner">
+        <div className="container">
+          <ScrollReveal animation="zoom-in">
+            <div className="cta-box-live">
+              <div className="cta-live-left">
+                <h2>Have a Similar Project in Mind?</h2>
               </div>
+              <div className="cta-live-right">
+                <Link to="/contact-us" className="pep-btn-hero-primary">
+                  <span>Start Your Project</span>
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+              <div className="cta-bottom-gradient-bar"></div>
             </div>
-          </div>
+          </ScrollReveal>
         </div>
-      )}
+      </section>
     </div>
   );
 };

@@ -1,43 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, Link, useLocation } from 'react-router-dom';
-import { 
-  ChevronDown, 
-  Menu, 
-  X, 
-  Globe, 
-  Smartphone, 
-  Cpu, 
-  ArrowRight,
-  Sparkles
-} from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { siteConfig, servicesData } from '../../data/pepData';
 import './Navbar.css';
-
-const serviceDropdownItems = [
-  {
-    title: 'Website Development',
-    description: 'Modern, responsive and high-performance websites',
-    icon: Globe,
-    link: '/services#website-development'
-  },
-  {
-    title: 'Mobile App Development',
-    description: 'Beautiful and scalable mobile applications',
-    icon: Smartphone,
-    link: '/services#mobile-app-development'
-  },
-  {
-    title: 'Customized Software',
-    description: 'Tailored software solutions built for specific business needs',
-    icon: Cpu,
-    link: '/services#customized-software'
-  }
-];
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [mobileServiceOpen, setMobileServiceOpen] = useState(false);
-  const [desktopDropdownOpen, setDesktopDropdownOpen] = useState(false);
+  const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -48,201 +19,165 @@ const Navbar = () => {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Close mobile drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
-    setMobileServiceOpen(false);
-    setDesktopDropdownOpen(false);
+    setMobileServicesOpen(false);
+    setServicesDropdownOpen(false);
+    window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  const isActive = (path) => {
+    if (path === '/' && location.pathname === '/') return true;
+    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    return false;
+  };
+
   return (
-    <header className={`navbar-header ${isScrolled ? 'scrolled' : ''}`}>
-      <div className="container navbar-container">
-        {/* Brand Logo */}
-        <Link to="/" className="navbar-brand">
-          <img src="/logo.png" alt="PEP Software Logo" className="brand-logo-img" />
-          <div className="brand-text">
-            <span className="brand-title">PEP <span className="brand-accent">SOFTWARE</span></span>
-          </div>
+    <header className={`pep-header ${isScrolled ? 'scrolled' : ''}`}>
+      <div className="container header-container">
+        {/* LOGO */}
+        <Link to="/" className="pep-logo-link" aria-label="Pep Software Home">
+          <img 
+            src={siteConfig.logo} 
+            alt="Pep Software Logo" 
+            className="pep-header-logo"
+          />
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="desktop-nav">
-          <NavLink to="/" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            Home
-          </NavLink>
+        {/* DESKTOP NAVIGATION */}
+        <nav className="pep-desktop-nav" aria-label="Main Navigation">
+          <ul className="nav-list">
+            <li className="nav-item">
+              <Link to="/" className={`nav-link ${isActive('/') ? 'active' : ''}`}>
+                Home
+              </Link>
+            </li>
+            
+            <li className="nav-item">
+              <Link to="/about-us" className={`nav-link ${isActive('/about-us') || isActive('/about') ? 'active' : ''}`}>
+                About us
+              </Link>
+            </li>
 
-          {/* Service Dropdown Container */}
-          <div 
-            className="nav-item-dropdown-wrapper"
-            onMouseEnter={() => setDesktopDropdownOpen(true)}
-            onMouseLeave={() => setDesktopDropdownOpen(false)}
-          >
-            <NavLink 
-              to="/services" 
-              className={({ isActive }) => `nav-item has-dropdown ${isActive ? 'active' : ''}`}
+            {/* SERVICES DROPDOWN */}
+            <li 
+              className="nav-item has-dropdown"
+              onMouseEnter={() => setServicesDropdownOpen(true)}
+              onMouseLeave={() => setServicesDropdownOpen(false)}
             >
-              Service
-              <ChevronDown className={`dropdown-icon ${desktopDropdownOpen ? 'rotate' : ''}`} size={16} />
-            </NavLink>
+              <Link 
+                to="/services" 
+                className={`nav-link dropdown-trigger ${isActive('/services') || servicesData.some(s => isActive('/' + s.slug)) ? 'active' : ''}`}
+              >
+                Services <ChevronDown size={15} className={`dropdown-icon ${servicesDropdownOpen ? 'open' : ''}`} />
+              </Link>
 
-            {/* Desktop Service Dropdown Card */}
-            {desktopDropdownOpen && (
-              <div className="service-dropdown-menu">
-                <div className="dropdown-header-badge">
-                  <Sparkles size={14} className="gold-icon" />
-                  <span>Our Core Expertise</span>
-                </div>
+              <div className={`pep-dropdown-menu ${servicesDropdownOpen ? 'show' : ''}`}>
                 <div className="dropdown-grid">
-                  {serviceDropdownItems.map((item, index) => {
-                    const IconComponent = item.icon;
-                    return (
-                      <Link 
-                        key={index} 
-                        to={item.link} 
-                        className="dropdown-card"
-                        onClick={() => setDesktopDropdownOpen(false)}
-                      >
-                        <div className="dropdown-card-icon">
-                          <IconComponent size={22} />
-                        </div>
-                        <div className="dropdown-card-content">
-                          <h4 className="dropdown-card-title">{item.title}</h4>
-                          <p className="dropdown-card-desc">{item.description}</p>
-                        </div>
-                        <ArrowRight size={16} className="card-hover-arrow" />
-                      </Link>
-                    );
-                  })}
-                </div>
-                <div className="dropdown-footer">
-                  <Link to="/services" className="dropdown-view-all">
-                    Explore all solutions & frameworks <ArrowRight size={14} />
-                  </Link>
+                  {servicesData.map((service) => (
+                    <Link 
+                      key={service.id} 
+                      to={`/${service.slug}`} 
+                      className="dropdown-item"
+                    >
+                      <span className="dropdown-item-title">{service.title}</span>
+                    </Link>
+                  ))}
                 </div>
               </div>
-            )}
-          </div>
+            </li>
 
-          <NavLink to="/portfolio" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            Portfolio
-          </NavLink>
+            <li className="nav-item">
+              <Link to="/our-portfolio" className={`nav-link ${isActive('/our-portfolio') || isActive('/portfolio') ? 'active' : ''}`}>
+                Our Portfolio
+              </Link>
+            </li>
 
-          <NavLink to="/about" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            About Us
-          </NavLink>
-
-          <NavLink to="/contact" className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}>
-            Contact Us
-          </NavLink>
+            <li className="nav-item">
+              <Link to="/contact-us" className={`nav-link ${isActive('/contact-us') || isActive('/contact') ? 'active' : ''}`}>
+                Contact us
+              </Link>
+            </li>
+          </ul>
         </nav>
 
-        {/* Header Right Action Button */}
-        <div className="desktop-actions">
-          <Link to="/contact" className="navbar-btn-primary">
-            Get Started
+        {/* CTA BUTTON */}
+        <div className="pep-header-cta">
+          <Link to="/contact-us" className="pep-btn-get-started">
+            <span>Get Started</span>
+            <ArrowRight size={15} />
           </Link>
-        </div>
 
-        {/* Mobile Hamburger Button */}
-        <button 
-          className="mobile-hamburger-btn"
-          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          aria-label="Toggle navigation menu"
-        >
-          {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-        </button>
+          {/* MOBILE TOGGLE */}
+          <button 
+            className="mobile-menu-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle Navigation Menu"
+          >
+            {mobileMenuOpen ? <X size={28} color="#151620" /> : <Menu size={28} color="#151620" />}
+          </button>
+        </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
-      {mobileMenuOpen && (
-        <div className="mobile-menu-drawer">
-          <nav className="mobile-nav">
-            <NavLink 
-              to="/" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Home
-            </NavLink>
-
-            {/* Mobile Accordion for Services */}
-            <div className="mobile-accordion">
-              <button 
-                className={`mobile-accordion-trigger ${mobileServiceOpen ? 'open' : ''}`}
-                onClick={() => setMobileServiceOpen(!mobileServiceOpen)}
-              >
-                <span>Service</span>
-                <ChevronDown size={18} className={`accordion-arrow ${mobileServiceOpen ? 'rotate' : ''}`} />
-              </button>
-
-              {mobileServiceOpen && (
-                <div className="mobile-accordion-content">
-                  <NavLink 
-                    to="/services" 
-                    className="mobile-sublink overview-link"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    All Services Overview
-                  </NavLink>
-                  {serviceDropdownItems.map((item, idx) => {
-                    const IconComp = item.icon;
-                    return (
-                      <Link 
-                        key={idx}
-                        to={item.link} 
-                        className="mobile-sublink"
-                        onClick={() => setMobileMenuOpen(false)}
-                      >
-                        <IconComp size={16} className="sublink-icon" />
-                        <span>{item.title}</span>
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-
-            <NavLink 
-              to="/portfolio" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Portfolio
-            </NavLink>
-
-            <NavLink 
-              to="/about" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              About Us
-            </NavLink>
-
-            <NavLink 
-              to="/contact" 
-              className={({ isActive }) => `mobile-nav-link ${isActive ? 'active' : ''}`}
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Contact Us
-            </NavLink>
-
-            <div className="mobile-cta-wrapper">
-              <Link 
-                to="/contact" 
-                className="navbar-btn-primary mobile-cta-btn"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Get Started Today
+      {/* MOBILE DRAWER MENU */}
+      <div className={`pep-mobile-drawer ${mobileMenuOpen ? 'open' : ''}`}>
+        <div className="mobile-drawer-inner">
+          <ul className="mobile-nav-list">
+            <li>
+              <Link to="/" className={`mobile-nav-link ${isActive('/') ? 'active' : ''}`}>
+                Home
               </Link>
-            </div>
-          </nav>
+            </li>
+            <li>
+              <Link to="/about-us" className={`mobile-nav-link ${isActive('/about-us') ? 'active' : ''}`}>
+                About us
+              </Link>
+            </li>
+            
+            <li className="mobile-services-section">
+              <div 
+                className="mobile-services-header"
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+              >
+                <span>Services</span>
+                <ChevronDown size={18} className={`dropdown-icon ${mobileServicesOpen ? 'open' : ''}`} />
+              </div>
+              
+              <ul className={`mobile-sub-list ${mobileServicesOpen ? 'show' : ''}`}>
+                {servicesData.map((service) => (
+                  <li key={service.id}>
+                    <Link to={`/${service.slug}`} className="mobile-sub-link">
+                      {service.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </li>
+
+            <li>
+              <Link to="/our-portfolio" className={`mobile-nav-link ${isActive('/our-portfolio') ? 'active' : ''}`}>
+                Our Portfolio
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact-us" className={`mobile-nav-link ${isActive('/contact-us') ? 'active' : ''}`}>
+                Contact us
+              </Link>
+            </li>
+          </ul>
+
+          <div className="mobile-drawer-cta">
+            <Link to="/contact-us" className="pep-btn-get-started w-full">
+              Get Started
+            </Link>
+          </div>
         </div>
-      )}
+      </div>
     </header>
   );
 };

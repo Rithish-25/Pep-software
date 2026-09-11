@@ -1,268 +1,200 @@
 import React, { useState } from 'react';
 import { 
   Mail, 
-  Phone, 
-  MapPin, 
-  Clock, 
-  Send, 
-  CheckCircle, 
-  ChevronDown, 
-  HelpCircle
+  Building,
+  PhoneCall,
+  CheckCircle2
 } from 'lucide-react';
-import { faqs } from '../../data/mockData';
+import { siteConfig } from '../../data/pepData';
+import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
 import './ContactPage.css';
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
     phone: '',
-    service: 'Website Development',
+    email: '',
+    subject: '',
     message: ''
   });
 
   const [submitted, setSubmitted] = useState(false);
-  const [activeFaq, setActiveFaq] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'phone') {
-      const numericValue = value.replace(/\D/g, '').slice(0, 10);
-      setFormData({
-        ...formData,
-        phone: numericValue
-      });
-    } else {
-      setFormData({
-        ...formData,
-        [name]: value
-      });
-    }
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setLoading(true);
     setTimeout(() => {
-      setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        service: 'Website Development',
-        message: ''
-      });
-    }, 4000);
-  };
-
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
+      setLoading(false);
+      setSubmitted(true);
+    }, 800);
   };
 
   return (
     <div className="contact-page">
-      {/* PAGE HERO */}
-      <section className="contact-hero">
-        <div className="container text-center">
-          <span className="contact-badge-gold">Get In Touch</span>
-          <h1 className="contact-hero-title">
-            Let's Build Something <span className="contact-gradient-gold">Extraordinary</span>
-          </h1>
-          <p className="contact-hero-desc">
-            Ready to initiate your custom software, mobile app, or website development project? Contact our engineering team today.
-          </p>
+      {/* TOP HEADER */}
+      <section className="contact-top-header text-center">
+        <div className="container">
+          <ScrollReveal animation="fade-up">
+            <h1 className="contact-title-orange">Contact us</h1>
+            <p className="contact-sub-header">Let's connect and grow your business together.</p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* MAIN CONTACT SECTION */}
-      <section className="contact-main-section">
+      {/* FORM & 3D CHARACTER SECTION */}
+      <section className="contact-form-section">
         <div className="container">
-          <div className="contact-grid">
-            {/* Left Column: Contact Cards */}
-            <div className="contact-info-column">
-              <span className="contact-badge-purple">Contact Details</span>
-              <h2>We'd Love To Hear From You</h2>
-              <p className="contact-intro">
-                Reach out to us via email, phone, or by scheduling an in-person consultation at our tech hub.
-              </p>
-
-              <div className="info-cards-list">
-                <div className="info-card">
-                  <div className="info-icon-box">
-                    <MapPin size={22} />
-                  </div>
-                  <div>
-                    <h4>Headquarters Office</h4>
-                    <p>100 Tech Park Way, Suite 400, Silicon Valley, CA 94025</p>
-                  </div>
-                </div>
-
-                <div className="info-card">
-                  <div className="info-icon-box">
-                    <Mail size={22} />
-                  </div>
-                  <div>
-                    <h4>Email Inquiries</h4>
-                    <p><a href="mailto:contact@pepsoftware.com">contact@pepsoftware.com</a></p>
-                  </div>
-                </div>
-
-                <div className="info-card">
-                  <div className="info-icon-box">
-                    <Phone size={22} />
-                  </div>
-                  <div>
-                    <h4>Direct Phone Call</h4>
-                    <p><a href="tel:+18005557377">+1 (800) 555-PEP1</a></p>
-                  </div>
-                </div>
-
-                <div className="info-card">
-                  <div className="info-icon-box">
-                    <Clock size={22} />
-                  </div>
-                  <div>
-                    <h4>Working Hours</h4>
-                    <p>Monday - Friday: 9:00 AM - 6:00 PM PST</p>
-                  </div>
-                </div>
-              </div>
+          <div className="contact-form-grid">
+            {/* LEFT 3D CHARACTER GRAPHIC */}
+            <div className="contact-graphic-col">
+              <ScrollReveal animation="slide-left">
+                <img 
+                  src={siteConfig.whyChooseUsGraphic || siteConfig.whoWeAreGraphic} 
+                  alt="Pep Software Support Specialist" 
+                  className="contact-3d-character float-animation"
+                />
+              </ScrollReveal>
             </div>
 
-            {/* Right Column: Contact Form */}
-            <div className="contact-form-column">
-              <div className="form-card">
-                <h3 className="form-title">Send Us A Message</h3>
-                <p className="form-subtitle">Fill out the form below and our lead engineer will respond within 24 hours.</p>
+            {/* RIGHT FORM CARD */}
+            <div className="contact-card-col">
+              <ScrollReveal animation="slide-right">
+                <div className="contact-white-card">
+                  <h2 className="contact-card-title">Get in Touch with Pep Software</h2>
+                  <p className="contact-card-desc">
+                    We'd love to hear from you! Whether you're looking for Website designing, Mobile app development, Expert UI/UX design, or complete web development services — <strong>Pep Software</strong> is here to bring your ideas to life.
+                  </p>
 
-                {submitted && (
-                  <div className="form-success-banner">
-                    <CheckCircle size={24} className="gold-icon" />
-                    <div>
-                      <h4>Thank You, {formData.name || 'Client'}!</h4>
-                      <p>Your message has been received. We will be in touch shortly.</p>
+                  {submitted ? (
+                    <div className="form-success-message">
+                      <CheckCircle2 size={48} color="#30BD9B" />
+                      <h3>Message Sent Successfully!</h3>
+                      <p>Thank you for contacting Pep Software. We will respond within 24 hours.</p>
+                      <button className="reset-btn" onClick={() => setSubmitted(false)}>
+                        Send Another Message
+                      </button>
                     </div>
-                  </div>
-                )}
+                  ) : (
+                    <form onSubmit={handleSubmit} className="pep-contact-form">
+                      <div className="form-row-2col">
+                        <div className="form-group">
+                          <label>Name</label>
+                          <input 
+                            type="text" 
+                            name="name" 
+                            required 
+                            placeholder="What's your name?" 
+                            value={formData.name}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Phone</label>
+                          <input 
+                            type="tel" 
+                            name="phone" 
+                            required 
+                            placeholder="Contact Number" 
+                            value={formData.phone}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
 
-                <form onSubmit={handleSubmit} className="contact-form">
-                  <div className="form-group">
-                    <label htmlFor="name">Full Name *</label>
-                    <input 
-                      type="text" 
-                      id="name" 
-                      name="name" 
-                      placeholder="e.g. Alexander Wright" 
-                      required 
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="form-input"
-                    />
-                  </div>
+                      <div className="form-row-2col">
+                        <div className="form-group">
+                          <label>Email</label>
+                          <input 
+                            type="email" 
+                            name="email" 
+                            required 
+                            placeholder="Drop us your email" 
+                            value={formData.email}
+                            onChange={handleChange}
+                          />
+                        </div>
+                        <div className="form-group">
+                          <label>Subject</label>
+                          <input 
+                            type="text" 
+                            name="subject" 
+                            placeholder="What's the scoop?" 
+                            value={formData.subject}
+                            onChange={handleChange}
+                          />
+                        </div>
+                      </div>
 
-                  <div className="form-row">
-                    <div className="form-group">
-                      <label htmlFor="email">Email Address *</label>
-                      <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="example@gmail.com" 
-                        required 
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="form-input"
-                      />
-                    </div>
+                      <div className="form-group">
+                        <label>Message</label>
+                        <textarea 
+                          name="message" 
+                          rows="4" 
+                          required 
+                          placeholder="What's on your mind?" 
+                          value={formData.message}
+                          onChange={handleChange}
+                        ></textarea>
+                      </div>
 
-                    <div className="form-group">
-                      <label htmlFor="phone">Phone Number</label>
-                      <input 
-                        type="tel" 
-                        id="phone" 
-                        name="phone" 
-                        placeholder="Enter 10-digit phone number" 
-                        maxLength={10}
-                        pattern="[0-9]{10}"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        className="form-input"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="service">Required Service *</label>
-                    <select 
-                      id="service" 
-                      name="service" 
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="form-select"
-                    >
-                      <option value="Website Development">Website Development</option>
-                      <option value="Mobile App Development">Mobile App Development</option>
-                      <option value="Customized Software">Customized Software</option>
-                      <option value="General Consultation">General Technical Consultation</option>
-                    </select>
-                  </div>
-
-                  <div className="form-group">
-                    <label htmlFor="message">Project Details / Message *</label>
-                    <textarea 
-                      id="message" 
-                      name="message" 
-                      rows="5" 
-                      placeholder="Describe your project..."
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="form-textarea"
-                    ></textarea>
-                  </div>
-
-                  <button type="submit" className="contact-btn-primary btn-submit">
-                    Send Message <Send size={18} />
-                  </button>
-                </form>
-              </div>
+                      <button type="submit" className="send-message-green-btn" disabled={loading}>
+                        {loading ? 'Sending...' : 'Send Message'}
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FAQ ACCORDION SECTION */}
-      <section className="faq-section">
+      {/* GET IN TOUCH INFO CARDS SECTION */}
+      <section className="contact-info-cards-section text-center">
         <div className="container">
-          <div className="contact-section-header">
-            <span className="contact-badge-gold">Got Questions?</span>
-            <h2>Frequently Asked Questions</h2>
-            <p>Here are quick answers to some of the most common questions our clients ask.</p>
-          </div>
+          <ScrollReveal animation="fade-up">
+            <span className="badge-tag teal">GET IN TOUCH</span>
+            <h2 className="info-section-title">Let's build something exceptional together.</h2>
+          </ScrollReveal>
 
-          <div className="faq-accordion-list">
-            {faqs.map((faq, idx) => (
-              <div 
-                key={idx} 
-                className={`faq-item ${activeFaq === idx ? 'open' : ''}`}
-                onClick={() => toggleFaq(idx)}
-              >
-                <div className="faq-question-row">
-                  <div className="faq-title">
-                    <HelpCircle size={20} className="gold-icon" />
-                    <h3>{faq.question}</h3>
-                  </div>
-                  <ChevronDown size={20} className={`faq-arrow ${activeFaq === idx ? 'rotate' : ''}`} />
+          <ScrollReveal animation="fade-up" delay={150}>
+            <div className="contact-3cards-grid">
+              {/* CARD 1: HEAD OFFICE */}
+              <div className="contact-info-box">
+                <div className="contact-icon-badge">
+                  <Building size={24} color="#30BD9B" />
                 </div>
-                {activeFaq === idx && (
-                  <div className="faq-answer">
-                    <p>{faq.answer}</p>
-                  </div>
-                )}
+                <h4>Head Office</h4>
+                <p>Marappa Street 1, Surampatti, Erode - 638009.</p>
               </div>
-            ))}
-          </div>
+
+              {/* CARD 2: LET'S TALK */}
+              <div className="contact-info-box">
+                <div className="contact-icon-badge">
+                  <PhoneCall size={24} color="#30BD9B" />
+                </div>
+                <h4>Let's Talk</h4>
+                <p>Phone :<br />+91 98841 41911<br />+91 90800 74141</p>
+              </div>
+
+              {/* CARD 3: EMAIL SUPPORT */}
+              <div className="contact-info-box">
+                <div className="contact-icon-badge">
+                  <Mail size={24} color="#30BD9B" />
+                </div>
+                <h4>Email Support</h4>
+                <p>contact@pepsoftwares.com</p>
+              </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
+
     </div>
   );
 };

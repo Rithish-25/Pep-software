@@ -1,82 +1,137 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   Target, 
   Eye, 
-  Sparkles, 
-  ArrowRight,
-  CheckCircle2
+  ArrowRight
 } from 'lucide-react';
-import { whyChooseUs } from '../../data/mockData';
+import { companyStats, siteConfig } from '../../data/pepData';
+import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
 import './AboutPage.css';
 
+const SkillBar = ({ label, percentage, delay = 0, duration = 7000 }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.2 }
+    );
+
+    const currentRef = ref.current;
+    if (currentRef) observer.observe(currentRef);
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef);
+    };
+  }, []);
+
+  return (
+    <div ref={ref} className="core-skill-item">
+      <div className="core-skill-header">
+        <span className="core-skill-label">{label}</span>
+        <span className="core-skill-percent">
+          <AnimatedCounter value={`${percentage}%`} duration={duration} />
+        </span>
+      </div>
+      <div className="core-skill-track">
+        <div 
+          className="core-skill-fill" 
+          style={{ 
+            width: isVisible ? `${percentage}%` : '0%',
+            transition: `width ${duration}ms cubic-bezier(0.16, 1, 0.3, 1)`,
+            transitionDelay: isVisible ? `${delay}ms` : '0ms'
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
 const AboutPage = () => {
+  const coreSkills = [
+    { label: "UI/UX Design", percentage: 94 },
+    { label: "Website Designing", percentage: 91 },
+    { label: "Mobile App Development", percentage: 83 },
+    { label: "AR/VR Designing", percentage: 70 }
+  ];
+
   return (
     <div className="about-page">
-      {/* HERO SECTION */}
-      <section className="about-hero">
+      {/* HERO BANNER / TOP HEADER */}
+      <section className="about-hero-top-section">
         <div className="container text-center">
-          <span className="about-badge-gold">About PEP Software</span>
-          <h1 className="about-hero-title">
-            Architecting The Future Of <span className="about-gradient-gold">Enterprise Technology</span>
-          </h1>
-          <p className="about-hero-desc">
-            We are a premier software engineering agency dedicated to transforming complex business ideas into robust, visually stunning, and highly scalable digital solutions.
-          </p>
+          <ScrollReveal animation="fade-up">
+            <h1 className="about-us-color-animated">About us</h1>
+            <p className="about-us-sub">Get to know Pep Software</p>
+          </ScrollReveal>
         </div>
       </section>
 
-      {/* STORY SECTION */}
+      {/* WHO WE ARE SECTION */}
       <section className="about-story-section">
         <div className="container">
-          <div className="story-grid">
-            <div className="story-content">
-              <span className="about-badge-purple">Our Story</span>
-              <h2>Pioneering Innovation With Passion & Precision</h2>
-              <p>
-                Founded with a mission to elevate standard software engineering into high-art digital experiences, PEP Software brings together world-class developers, UI/UX designers, and cloud architects.
-              </p>
-              <p>
-                From fast-growing tech startups to established enterprise corporations, we engineer custom websites, intuitive mobile apps, and business-critical software solutions tailored to fuel long-term growth.
-              </p>
+          <ScrollReveal animation="fade-up">
+            <span className="badge-tag teal">WHO WE ARE?</span>
+            <h2 className="story-main-headline">Designing Experiences. Developing Futures.</h2>
+          </ScrollReveal>
 
-              <div className="story-checklist">
-                <div className="check-item">
-                  <CheckCircle2 size={18} className="gold-icon" />
-                  <span>100% Transparent Agile Sprints</span>
+          <ScrollReveal animation="fade-up" delay={150}>
+            <div className="story-content-body">
+              <p>
+                Established in 2021, <strong>Pep Software</strong> is a creative and results-driven design and development company that helps startups, enterprises, and agencies bring their digital visions to life.
+              </p>
+              <p>
+                We specialize in <strong>UI/UX design</strong>, <strong>website designing</strong>, <strong>mobile app development</strong>, and <strong>immersive 3D and AR/VR experiences</strong> — blending creativity with technology to craft meaningful and engaging digital solutions.
+              </p>
+              <p>
+                Our expert team combines strategic thinking, cutting-edge tools, and user-centric design to deliver purposeful experiences that not only look great but also perform seamlessly.
+              </p>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* CORE STRENGTHS / ANIMATED PERCENTAGE SKILL BARS SECTION */}
+      <section className="core-strengths-section">
+        <div className="container">
+          <div className="strengths-grid">
+            <div className="strengths-text-col">
+              <ScrollReveal animation="fade-up">
+                <span className="badge-tag teal">OUR CORE STRENGTHS</span>
+                <h2 className="strengths-headline">Creating Real Value Through Design, Apps & UX</h2>
+                <p className="strengths-sub">
+                  We combine design thinking, development skill, and immersive technologies to create powerful digital experiences across multiple domains.
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-up" delay={200}>
+                <div className="core-skills-list">
+                  {coreSkills.map((skill, idx) => (
+                    <SkillBar 
+                      key={idx} 
+                      label={skill.label} 
+                      percentage={skill.percentage} 
+                      delay={idx * 200}
+                      duration={5500}
+                    />
+                  ))}
                 </div>
-                <div className="check-item">
-                  <CheckCircle2 size={18} className="gold-icon" />
-                  <span>Enterprise Security & Data Protection</span>
-                </div>
-                <div className="check-item">
-                  <CheckCircle2 size={18} className="gold-icon" />
-                  <span>Dedicated Post-Launch Support</span>
-                </div>
-              </div>
+              </ScrollReveal>
             </div>
 
-            <div className="story-card-visual">
-              <div className="brand-story-card">
-                <img src="/logo.png" alt="PEP Software Logo" className="story-logo" />
-                <h3>PEP SOFTWARE</h3>
-                <span className="story-badge">Established & Scaling</span>
-                <p className="story-tagline">"Where Quality Code Meets World-Class Design"</p>
-                <div className="story-stats-strip">
-                  <div>
-                    <h4>150+</h4>
-                    <span>Projects</span>
-                  </div>
-                  <div>
-                    <h4>99%</h4>
-                    <span>Satisfied</span>
-                  </div>
-                  <div>
-                    <h4>24/7</h4>
-                    <span>Support</span>
-                  </div>
-                </div>
-              </div>
+            <div className="strengths-image-col">
+              <ScrollReveal animation="slide-right">
+                <img 
+                  src={siteConfig.whoWeAreGraphic} 
+                  alt="Our Core Strengths - Pep Software Team" 
+                  className="strengths-3d-img float-animation"
+                />
+              </ScrollReveal>
             </div>
           </div>
         </div>
@@ -85,67 +140,73 @@ const AboutPage = () => {
       {/* MISSION & VISION */}
       <section className="mission-vision-section">
         <div className="container">
-          <div className="mission-grid">
-            <div className="mv-card">
-              <div className="mv-header-row">
-                <div className="mv-icon-box purple">
-                  <Target size={30} />
+          <div className="mv-grid">
+            <ScrollReveal animation="slide-left">
+              <div className="mv-card">
+                <div className="mv-icon-box">
+                  <Target size={32} />
                 </div>
-                <span className="about-badge-purple">Our Mission</span>
+                <h3>Our Mission</h3>
+                <p>
+                  To empower businesses worldwide by designing and delivering innovative, reliable, and high-performance digital products.
+                </p>
               </div>
-              <h3>Transforming Businesses Through Software Excellence</h3>
-              <p>
-                To empower global businesses by engineering intuitive, high&#8209;performance web and mobile software solutions that accelerate digital transformation and deliver measurable ROI.
-              </p>
-            </div>
+            </ScrollReveal>
 
-            <div className="mv-card">
-              <div className="mv-header-row">
+            <ScrollReveal animation="slide-right" delay={150}>
+              <div className="mv-card">
                 <div className="mv-icon-box gold">
-                  <Eye size={30} />
+                  <Eye size={32} />
                 </div>
-                <span className="about-badge-gold">Our Vision</span>
+                <h3>Our Vision</h3>
+                <p>
+                  To be recognized globally as a trusted technology partner known for technical excellence, creative design, and transformative software.
+                </p>
               </div>
-              <h3>Setting The Global Benchmark For Software Innovation</h3>
-              <p>
-                To be the world’s most trusted software development partner, recognized for setting new standards in aesthetic user interfaces, resilient cloud architecture, and client success.
-              </p>
-            </div>
+            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* OUR APPROACH */}
-      <section className="values-section">
+      {/* STATS STRIP */}
+      <section className="about-stats-section">
         <div className="container">
-          <div className="about-section-header">
-            <span className="about-badge-purple">Core Pillars</span>
-            <h2>Our Engineering Philosophy</h2>
-            <p>We adhere to strict quality standards to ensure your software is fast, secure, and built to scale effortlessly.</p>
-          </div>
-
-          <div className="values-grid">
-            {whyChooseUs.map((val, idx) => (
-              <div key={idx} className="value-card">
-                <div className="val-icon">
-                  <Sparkles size={22} />
+          <div className="stats-strip-grid">
+            {companyStats.map((stat, idx) => (
+              <ScrollReveal key={idx} animation="zoom-in" delay={idx * 100}>
+                <div className="about-stat-card">
+                  <AnimatedCounter 
+                    value={stat.value} 
+                    className="stat-number text-gradient-brand" 
+                  />
+                  <h4 className="stat-title">{stat.label}</h4>
+                  <p className="stat-text">{stat.desc}</p>
                 </div>
-                <h3>{val.title}</h3>
-                <p>{val.description}</p>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="about-cta-section">
-        <div className="container text-center">
-          <h2>Ready To Build Your Next Big Project With PEP Software?</h2>
-          <p>Partner with a dedicated team of experts obsessed with your success.</p>
-          <Link to="/contact" className="about-btn-primary lg">
-            Start Your Journey <ArrowRight size={18} />
-          </Link>
+
+
+      {/* CTA BANNER */}
+      <section className="pep-cta-banner">
+        <div className="container">
+          <ScrollReveal animation="zoom-in">
+            <div className="cta-box-live">
+              <div className="cta-live-left">
+                <h2>Let's Build Something Extraordinary Together</h2>
+              </div>
+              <div className="cta-live-right">
+                <Link to="/contact-us" className="pep-btn-hero-primary">
+                  <span>Start Your Project</span>
+                  <ArrowRight size={18} />
+                </Link>
+              </div>
+              <div className="cta-bottom-gradient-bar"></div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

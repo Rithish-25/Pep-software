@@ -1,254 +1,355 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { 
-  Globe, 
-  Smartphone, 
-  Cpu, 
   ArrowRight, 
   Sparkles, 
-  CheckCircle, 
-  ShieldCheck
+  Check, 
+  Star,
+  Mail,
+  Palette,
+  Globe,
+  Smartphone,
+  Layers,
+  ArrowUpRight
 } from 'lucide-react';
-import { servicesData, portfolioProjects, whyChooseUs, companyStats } from '../../data/mockData';
+import { 
+  siteConfig, 
+  companyStats, 
+  servicesData, 
+  whyChooseUs, 
+  workflowSteps 
+} from '../../data/pepData';
+import ClientMarquee from '../../components/ClientMarquee/ClientMarquee';
+import TestimonialSlider from '../../components/TestimonialSlider/TestimonialSlider';
+import ScrollReveal from '../../components/ScrollReveal/ScrollReveal';
+import AnimatedCounter from '../../components/AnimatedCounter/AnimatedCounter';
 import './Home.css';
 
 const Home = () => {
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const getServiceIcon = (iconName) => {
+    switch (iconName) {
+      case 'Palette': return <Palette size={28} />;
+      case 'Globe': return <Globe size={28} />;
+      case 'Smartphone': return <Smartphone size={28} />;
+      case 'Layers': return <Layers size={28} />;
+      default: return <Globe size={28} />;
+    }
+  };
+
   return (
     <div className="home-page">
-      {/* HERO SECTION */}
-      <section className="hero-section">
-        <div className="hero-bg-shapes">
-          <div className="shape shape-purple"></div>
-          <div className="shape shape-gold"></div>
-        </div>
-
-        <div className="container hero-container">
-          <div className="hero-content">
-            <div className="hero-badge">
-              <Sparkles size={16} className="gold-icon" />
-              <span>Next-Gen Enterprise Engineering</span>
-            </div>
-
-            <h1 className="hero-title">
-              Engineering <span className="text-gradient-gold">Digital Excellence</span> For Modern Enterprises
-            </h1>
-
-            <p className="hero-description">
-              PEP Software crafts high-performance web applications, scalable mobile apps, and bespoke enterprise software engineered to propel your brand into the future.
-            </p>
-
-            <div className="hero-actions">
-              <Link to="/services" className="home-btn-primary">
-                Explore Services <ArrowRight size={18} />
-              </Link>
-              <Link to="/portfolio" className="home-btn-outline">
-                View Portfolio
-              </Link>
-            </div>
-
-            <div className="hero-highlights">
-              <div className="highlight-item">
-                <CheckCircle size={18} className="gold-icon" />
-                <span>Custom Built Codebase</span>
+      {/* 1. HERO SECTION */}
+      <section className="pep-hero-section">
+        <div className="hero-glow-bg"></div>
+        <div className="container hero-grid">
+          <div className="hero-text-content">
+            <ScrollReveal animation="fade-up">
+              <div className="badge-tag glass hero-subbadge">
+                <Sparkles size={16} className="brand-icon" />
+                <span>Welcome to Pep Software</span>
               </div>
-              <div className="highlight-item">
-                <CheckCircle size={18} className="gold-icon" />
-                <span>99.9% Uptime Guarantee</span>
-              </div>
-              <div className="highlight-item">
-                <CheckCircle size={18} className="gold-icon" />
-                <span>24/7 Dedicated Support</span>
-              </div>
-            </div>
-          </div>
+            </ScrollReveal>
 
-          <div className="hero-visual">
-            <div className="visual-card">
-              <div className="card-top-bar">
-                <div className="dot red"></div>
-                <div className="dot yellow"></div>
-                <div className="dot green"></div>
-                <span className="window-title">PEP Software Platform v2.5</span>
+            <ScrollReveal animation="fade-up" delay={150}>
+              <h1 className="pep-hero-title">
+                Digital Excellence <span className="text-gradient-brand">Starts Here.</span>
+              </h1>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={300}>
+              <p className="pep-hero-desc">
+                {siteConfig.slogan}
+              </p>
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={450}>
+              <div className="hero-actions">
+                <Link to="/our-portfolio" className="pep-btn-hero-primary">
+                  <span>Our Portfolio</span>
+                  <ArrowRight size={18} />
+                </Link>
+                <Link to="/contact-us" className="pep-btn-hero-outline">
+                  <span>Contact Us</span>
+                </Link>
               </div>
-              <div className="visual-hero-brand">
-                <img src="/logo.png" alt="PEP Software Logo" className="hero-card-logo" />
-                <div className="hero-badge-pill">
-                  <span className="live-dot"></span> Active Suite
+            </ScrollReveal>
+
+            <ScrollReveal animation="fade-up" delay={600}>
+              <div className="hero-trust-list">
+                <div className="trust-item">
+                  <Check size={18} className="teal-icon" />
+                  <span>Custom Architecture</span>
+                </div>
+                <div className="trust-item">
+                  <Check size={18} className="teal-icon" />
+                  <span>Scalable Platforms</span>
+                </div>
+                <div className="trust-item">
+                  <Check size={18} className="teal-icon" />
+                  <span>End-to-End Support</span>
                 </div>
               </div>
+            </ScrollReveal>
+          </div>
 
-              <div className="hero-code-snippet">
-                <pre>
-                  <code>
-                    <span className="token-purple">const</span> software = <span className="token-gold">new</span> PEP_Suite(&#123;<br/>
-                    &nbsp;&nbsp;architecture: <span className="token-str">'Cloud Native'</span>,<br/>
-                    &nbsp;&nbsp;performance: <span className="token-str">'Lightning Fast'</span>,<br/>
-                    &nbsp;&nbsp;security: <span className="token-str">'Enterprise Grade'</span><br/>
-                    &#125;);<br/>
-                    <span className="token-purple">await</span> software.<span className="token-gold">deploy</span>();
-                  </code>
-                </pre>
+          <div className="hero-visual-content">
+            <ScrollReveal animation="slide-right" delay={200}>
+              <div className="hero-img-wrapper">
+                <img 
+                  src={siteConfig.heroGraphic} 
+                  alt="Pep Software Digital Excellence" 
+                  className="hero-3d-graphic float-animation"
+                />
               </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* 2. CLIENT LOGOS MARQUEE */}
+      <ClientMarquee />
+
+      {/* 3. WHO WE ARE SECTION */}
+      <section className="pep-who-we-are-section">
+        <div className="container">
+          <div className="who-we-are-grid">
+            <div className="who-image-side">
+              <ScrollReveal animation="slide-left">
+                <img 
+                  src={siteConfig.whoWeAreGraphic} 
+                  alt="Maximize your digital potential - Pep Software 3D Target" 
+                  className="who-3d-img float-animation-slow"
+                />
+              </ScrollReveal>
+            </div>
+
+            <div className="who-text-side">
+              <ScrollReveal animation="fade-up">
+                <span className="badge-tag teal">WHO WE ARE?</span>
+                <h2>Maximize your digital potential and captivate your audience.</h2>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-up" delay={150}>
+                <p className="who-sub-p">
+                  At Pep Software, we turn your ideas into impactful digital solutions. Whether you're building a website, refining your UI/UX, or launching a product — our team delivers tailored strategies that boost performance and keep users engaged.
+                </p>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-up" delay={300}>
+                <div className="who-checklist-grid">
+                  <div className="checklist-col">
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>Tailored Digital Solutions</span></div>
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>User-Centered Design Focus</span></div>
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>Transparent & Flexible Pricing</span></div>
+                  </div>
+                  <div className="checklist-col">
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>Business-Aligned Strategy</span></div>
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>Reliable Support & Delivery</span></div>
+                    <div className="check-item"><Check size={18} className="teal-icon" /><span>Forward-Thinking Innovation</span></div>
+                  </div>
+                </div>
+              </ScrollReveal>
+
+              <ScrollReveal animation="fade-up" delay={450}>
+                <div className="who-actions-row">
+                  <Link to="/services" className="pep-btn-hero-primary sm">
+                    <span>Our Services</span>
+                    <ArrowRight size={16} />
+                  </Link>
+                  <Link to="/contact-us" className="link-underlined">
+                    Customer Support
+                  </Link>
+                </div>
+              </ScrollReveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* STATS SECTION */}
-      <section className="stats-strip-section">
-        <div className="container">
-          <div className="stats-grid">
-            {companyStats.map((stat, idx) => (
-              <div key={idx} className="stat-card">
-                <h3 className="stat-number text-gradient-gold">{stat.value}</h3>
-                <p className="stat-label">{stat.label}</p>
-              </div>
+      {/* 4. SERVICES GRID SECTION */}
+      <section className="pep-services-section">
+        <div className="container relative-container">
+          {/* FLOATING 3D SPHERE ON LEFT SIDE WITH SCROLL ROTATION */}
+          <img 
+            src={siteConfig.servicesFloatingSphere} 
+            alt="3D Floating Sphere" 
+            className="floating-sphere-img left-sphere"
+            style={{ transform: `rotate(${scrollY * 0.2}deg)` }}
+          />
+
+          <ScrollReveal animation="fade-up">
+            <div className="section-header">
+              <span className="badge-tag teal">Our Services</span>
+              <h2>Start your digital success journey with Pep Software.</h2>
+            </div>
+          </ScrollReveal>
+
+          <div className="services-grid">
+            {servicesData.map((service, index) => (
+              <ScrollReveal key={service.id} animation="fade-up" delay={index * 150}>
+                <div className="service-card">
+                  <div className="service-card-top">
+                    <div className="service-icon-box">
+                      {getServiceIcon(service.iconName)}
+                    </div>
+                    <span className="service-badge">{service.badge}</span>
+                  </div>
+
+                  <h3 className="service-title">{service.title}</h3>
+                  <p className="service-desc">{service.shortDesc}</p>
+
+                  <Link to={`/${service.slug}`} className="service-card-link">
+                    <span>Learn more</span>
+                    <ArrowUpRight size={18} />
+                  </Link>
+                </div>
+              </ScrollReveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* SERVICES OVERVIEW */}
-      <section className="services-overview-section">
+      {/* 5. WHY CHOOSE US SECTION */}
+      <section className="pep-why-section">
         <div className="container">
-          <div className="section-header">
-            <span className="badge-purple">What We Do</span>
-            <h2>Innovative Services Engineered For Growth</h2>
-            <p>We combine design elegance with software robustness to create digital experiences that drive real business impact.</p>
-          </div>
+          <div className="why-layout">
+            <div className="why-header-side">
+              <ScrollReveal animation="fade-up">
+                <span className="badge-tag teal">WHY CHOOSE US?</span>
+                <h2>Smart Solutions, Real Results — Built Around Your Vision</h2>
+              </ScrollReveal>
 
-          <div className="services-grid">
-            {servicesData.map((service, index) => {
-              const iconMap = { Globe, Smartphone, Cpu };
-              const IconComp = iconMap[service.iconName] || Globe;
-              return (
-                <div key={index} className="service-card">
-                  <div className="service-card-header">
-                    <div className="service-icon-box">
-                      <IconComp size={28} />
-                    </div>
-                    <span className="service-badge">{service.badge}</span>
-                  </div>
-                  <h3 className="service-card-title">{service.title}</h3>
-                  <p className="service-card-desc">{service.shortDesc}</p>
-                  
-                  <ul className="service-feature-list">
-                    {service.features.slice(0, 3).map((feat, fIdx) => (
-                      <li key={fIdx}>
-                        <CheckCircle size={15} className="gold-icon" />
-                        <span>{feat}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <Link to={`/services#${service.id}`} className="service-learn-more">
-                    Learn More <ArrowRight size={16} />
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE US */}
-      <section className="why-choose-section">
-        <div className="container">
-          <div className="why-choose-layout">
-            <div className="why-choose-content">
-              <span className="badge-gold">Why PEP Software</span>
-              <h2>Built For Speed, Security & Scalability</h2>
-              <p>
-                Our team brings together top-tier software engineers, UI designers, and solution architects to turn complex business needs into seamless digital solutions.
-              </p>
-
-              <div className="why-features-grid">
+              <ScrollReveal animation="fade-up" delay={150}>
+                <p className="why-desc-p">
+                  We don't just deliver projects — we partner with you to create digital experiences that are impactful, efficient, and built to grow with your business.
+                </p>
+              </ScrollReveal>
+              
+              <div className="why-points-list">
                 {whyChooseUs.map((item, idx) => (
-                  <div key={idx} className="why-feature-item">
-                    <div className="why-icon-wrapper">
-                      <Sparkles size={20} />
+                  <ScrollReveal key={idx} animation="fade-up" delay={200 + idx * 150}>
+                    <div className={`why-point-card ${item.highlight ? 'highlighted' : ''}`}>
+                      <div className="star-icon-circle">
+                        <Star size={18} className="star-svg" />
+                      </div>
+                      <div>
+                        <h4>{item.title}</h4>
+                        <p>{item.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h4>{item.title}</h4>
-                      <p>{item.description}</p>
-                    </div>
-                  </div>
+                  </ScrollReveal>
                 ))}
               </div>
             </div>
 
-            <div className="why-visual-side">
-              <div className="brand-focus-card">
-                <img src="/logo.png" alt="PEP Brand Highlight" className="brand-focus-logo" />
-                <h3>Your Trusted Technology Partner</h3>
-                <p>Delivering cutting-edge web, mobile, and custom enterprise software for forward-thinking companies worldwide.</p>
-                <div className="guarantee-badge">
-                  <ShieldCheck size={22} className="gold-icon" />
-                  <span>100% Code Ownership & Guarantee</span>
-                </div>
-              </div>
+            <div className="why-image-side">
+              <ScrollReveal animation="slide-right">
+                <img 
+                  src={siteConfig.whyChooseUsGraphic} 
+                  alt="Smart Solutions Built Around Your Vision - 3D Developers" 
+                  className="why-3d-img float-animation"
+                />
+              </ScrollReveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* FEATURED PORTFOLIO */}
-      <section className="portfolio-preview-section">
+      {/* STATS STRIP */}
+      <section className="pep-stats-strip-section">
         <div className="container">
-          <div className="section-header">
-            <span className="badge-purple">Our Work</span>
-            <h2>Featured Client Success Stories</h2>
-            <p>Explore some of our recent web applications, mobile platforms, and customized software systems.</p>
-          </div>
-
-          <div className="portfolio-grid">
-            {portfolioProjects.slice(0, 3).map((project) => (
-              <div key={project.id} className="portfolio-card">
-                <div className="portfolio-image-wrapper">
-                  <img src={project.image} alt={project.title} className="portfolio-img" />
-                  <span className="category-pill">{project.category}</span>
+          <div className="stats-cards-grid">
+            {companyStats.map((stat, i) => (
+              <ScrollReveal key={i} animation="zoom-in" delay={i * 100}>
+                <div className="stat-card">
+                  <AnimatedCounter 
+                    value={stat.value} 
+                    className="stat-value text-gradient-brand" 
+                  />
+                  <h4 className="stat-label">{stat.label}</h4>
+                  <p className="stat-desc">{stat.desc}</p>
                 </div>
-                <div className="portfolio-card-body">
-                  <h3 className="portfolio-title">{project.title}</h3>
-                  <p className="portfolio-desc">{project.description}</p>
-                  <div className="tech-stack-tags">
-                    {project.techStack.map((tech, tIdx) => (
-                      <span key={tIdx} className="tech-tag">{tech}</span>
-                    ))}
-                  </div>
-                  <div className="portfolio-card-action">
-                    <Link to="/portfolio" className="home-btn-primary sm btn-card-link">
-                      View Project <ArrowRight size={14} />
-                    </Link>
-                  </div>
-                </div>
-              </div>
+              </ScrollReveal>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="portfolio-cta-center">
-            <Link to="/portfolio" className="home-btn-secondary">
-              View All Projects <ArrowRight size={18} />
-            </Link>
+      {/* 6. HOW WE WORK SECTION */}
+      <section className="pep-process-section">
+        <div className="container">
+          <div className="process-layout">
+            <div className="process-image-side">
+              <ScrollReveal animation="slide-left">
+                <img 
+                  src={siteConfig.howWeWorkGraphic} 
+                  alt="Your Project Journey Made Simple - 3D Team" 
+                  className="process-3d-img float-animation-slow"
+                />
+              </ScrollReveal>
+            </div>
+
+            <div className="process-text-side">
+              <ScrollReveal animation="fade-up">
+                <span className="badge-tag teal">HOW WE WORK?</span>
+                <h2 className="process-main-title">Your Project Journey Made Simple</h2>
+              </ScrollReveal>
+
+              <div className="process-steps-list">
+                {workflowSteps.map((step, idx) => (
+                  <ScrollReveal key={step.step} animation="fade-up" delay={idx * 150}>
+                    <div className="process-step-item">
+                      <div className="step-star-badge">
+                        <Star size={18} />
+                      </div>
+                      <div className="step-content">
+                        <h3>{step.step}. {step.title}</h3>
+                        <p>{step.description}</p>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* CALL TO ACTION BANNER */}
-      <section className="cta-banner-section">
+      {/* 7. TESTIMONIALS */}
+      <TestimonialSlider />
+
+      {/* 8. BOTTOM CTA BANNER */}
+      <section className="pep-cta-banner">
         <div className="container">
-          <div className="cta-banner-card">
-            <div className="cta-content">
-              <span className="cta-tag">Let's Build Together</span>
-              <h2>Ready To Elevate Your Software Infrastructure?</h2>
-              <p>Contact our experts today for a free technical consultation and tailored project quote.</p>
+          <ScrollReveal animation="zoom-in">
+            <div className="cta-box-live">
+              <div className="cta-live-left">
+                <h2>Seize the digital spotlight and boost your business with Pep Software.</h2>
+              </div>
+              <div className="cta-live-right">
+                <div className="cta-support-icon">
+                  <Mail size={24} />
+                </div>
+                <div>
+                  <span className="cta-support-label">CUSTOMER SUPPORT</span>
+                  <a href={`mailto:${siteConfig.contact.email}`} className="cta-support-email">
+                    {siteConfig.contact.email}
+                  </a>
+                </div>
+              </div>
+              <div className="cta-bottom-gradient-bar"></div>
             </div>
-            <div className="cta-action">
-              <Link to="/contact" className="home-btn-primary lg">
-                Schedule a Call <ArrowRight size={20} />
-              </Link>
-            </div>
-          </div>
+          </ScrollReveal>
         </div>
       </section>
     </div>

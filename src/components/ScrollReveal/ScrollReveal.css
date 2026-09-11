@@ -1,0 +1,31 @@
+.scroll-reveal {
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* FADE UP */
+.scroll-reveal.reveal-fade-up {
+  transform: translateY(50px);
+}
+
+/* SLIDE LEFT (Enters from left) */
+.scroll-reveal.reveal-slide-left {
+  transform: translateX(-70px);
+}
+
+/* SLIDE RIGHT (Enters from right) */
+.scroll-reveal.reveal-slide-right {
+  transform: translateX(70px);
+}
+
+/* ZOOM IN */
+.scroll-reveal.reveal-zoom-in {
+  transform: scale(0.85);
+}
+
+/* TRIGGERED STATE WHEN SCROLLED INTO VIEW */
+.scroll-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}

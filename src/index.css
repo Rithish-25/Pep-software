@@ -1,47 +1,53 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
 
 :root {
-  /* Brand Color Palette */
-  --purple-primary: #3B1566;
-  --purple-dark: #1E0836;
-  --purple-light: #521E8C;
-  --purple-accent: #6D28D9;
-  --purple-glow: rgba(109, 40, 217, 0.35);
-
-  --gold-primary: #FFB703;
-  --gold-bright: #FFC107;
-  --gold-dark: #D97706;
-  --gold-light: #FFE082;
-  --gold-glow: rgba(255, 183, 3, 0.4);
-
-  --white: #FFFFFF;
-  --off-white: #F9FAFB;
-  --light-bg: #F4F0FA;
+  /* Pep Software Authentic Live Site Color Tokens */
+  --teal-accent: #30BD9B;
+  --teal-hover: #269E81;
+  --teal-soft: rgba(48, 189, 155, 0.12);
   
-  --text-dark: #1E1828;
-  --text-muted: #6B7280;
-  --text-light: #E5E7EB;
-
-  --border-light: rgba(59, 21, 102, 0.1);
-  --border-glass: rgba(255, 255, 255, 0.18);
-
-  --shadow-sm: 0 4px 6px -1px rgba(30, 8, 54, 0.05);
-  --shadow-md: 0 10px 15px -3px rgba(30, 8, 54, 0.1);
-  --shadow-lg: 0 20px 25px -5px rgba(30, 8, 54, 0.15);
-  --shadow-gold: 0 8px 25px rgba(255, 183, 3, 0.3);
-  --shadow-purple: 0 10px 30px rgba(59, 21, 102, 0.25);
-
-  --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  --purple-accent: #885DD1;
+  --purple-hover: #7248BA;
+  --purple-soft: rgba(136, 93, 209, 0.12);
   
-  --radius-sm: 8px;
-  --radius-md: 14px;
+  --dark-bg-hero: linear-gradient(135deg, #151620 0%, #2A2B3F 60%, #1A1C2B 100%);
+  --dark-card: #2A2B3F;
+  --dark-surface: #151620;
+
+  --light-bg-page: #FFFFFF;
+  --light-bg-section: #F5F5F7;
+  --light-bg-alt: #F9FBFF;
+
+  --text-dark: #151620;
+  --text-body: #4A4C63;
+  --text-muted: #797A8C;
+  --text-light: #FFFFFF;
+
+  /* Gradients */
+  --pep-gradient-brand: linear-gradient(90deg, #30BD9B 0%, #885DD1 100%);
+  --pep-gradient-soft: linear-gradient(90deg, rgba(48, 189, 155, 0.1) 0%, rgba(136, 93, 209, 0.1) 100%);
+  --pep-gradient-dark: linear-gradient(180deg, #151620 0%, #2A2B3F 100%);
+
+  --border-light: #E8E9F1;
+  --border-dark-glass: rgba(255, 255, 255, 0.12);
+
+  --shadow-sm: 0 4px 12px rgba(21, 22, 32, 0.05);
+  --shadow-md: 0 10px 25px rgba(21, 22, 32, 0.08);
+  --shadow-lg: 0 20px 40px rgba(21, 22, 32, 0.14);
+  --shadow-glow-teal: 0 10px 25px rgba(48, 189, 155, 0.3);
+  --shadow-glow-purple: 0 10px 25px rgba(136, 93, 209, 0.3);
+
+  --radius-sm: 6px;
+  --radius-md: 12px;
   --radius-lg: 20px;
+  --radius-xl: 30px;
   --radius-full: 9999px;
 
-  --font-heading: 'Outfit', sans-serif;
+  --font-heading: 'Plus Jakarta Sans', sans-serif;
   --font-body: 'Plus Jakarta Sans', sans-serif;
+
+  --transition-normal: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 0.15s ease;
 }
 
 * {
@@ -50,35 +56,23 @@
   box-sizing: border-box;
 }
 
+html, body, #root {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
 html {
   scroll-behavior: smooth;
+  font-size: 16px;
 }
 
 body {
   font-family: var(--font-body);
-  background-color: var(--white);
+  background-color: var(--light-bg-page);
   color: var(--text-dark);
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #150628;
-}
-
-::-webkit-scrollbar-thumb {
-  background: var(--purple-light);
-  border-radius: var(--radius-full);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: var(--gold-primary);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -86,20 +80,129 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-dark);
   font-weight: 700;
   line-height: 1.25;
-  overflow-wrap: break-word;
-  word-wrap: break-word;
-  hyphens: manual;
 }
 
 a {
   text-decoration: none;
   color: inherit;
-  transition: var(--transition-fast);
+  transition: var(--transition-normal);
 }
 
+ul, ol {
+  list-style: none;
+}
+
+/* Global Container */
 .container {
   width: 100%;
-  max-width: 1240px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Gradient Text Utilities */
+.text-gradient-brand {
+  background: var(--pep-gradient-brand);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-teal {
+  background: linear-gradient(135deg, #30BD9B 0%, #269E81 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-purple {
+  background: linear-gradient(135deg, #885DD1 0%, #7248BA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-white {
+  background: linear-gradient(180deg, #FFFFFF 0%, #DCDDE8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Badge System */
+.badge-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.badge-tag.brand {
+  background: var(--pep-gradient-soft);
+  color: var(--purple-accent);
+  border: 1px solid rgba(136, 93, 209, 0.2);
+}
+
+.badge-tag.teal {
+  background: var(--teal-soft);
+  color: var(--teal-accent);
+  border: 1px solid rgba(48, 189, 155, 0.2);
+}
+
+.badge-tag.purple {
+  background: var(--purple-soft);
+  color: var(--purple-accent);
+  border: 1px solid rgba(136, 93, 209, 0.2);
+}
+
+.badge-tag.glass {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--border-dark-glass);
+}
+
+/* Section Header */
+.section-header {
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto 50px auto;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin: 12px 0 16px 0;
+  color: var(--text-dark);
+}
+
+.section-header p {
+  font-size: 1.125rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .section-header h2 {
+    font-size: 1.85rem;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #151620;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--purple-accent);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-accent);
 }
